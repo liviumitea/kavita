@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kavita
+  namespace: kavita # Change this namespace if needed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+  template:
+    metadata:
+      labels:
+        app: kavita
+    spec:
+      containers:
+      - name: kavita
+        image: jvmilazz0/kavita:latest
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: manga-volume
+          mountPath: /manga
+        - name: data-volume
+          mountPath: /kavita/config
+      volumes:
+      - name: manga-volume
+        hostPath:
+          path: /data-nfs/kavita
+      - name: data-volume
+        hostPath:
+          path: /data-nfs/kavita

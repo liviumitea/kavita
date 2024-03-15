@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kavita
+  namespace: kavita # Change this namespace if needed
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 172.16.23.31
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: kavita
